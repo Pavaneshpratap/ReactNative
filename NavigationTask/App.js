@@ -9,6 +9,7 @@ import Project4 from './src/Project4'
 import Project5 from './src/Project5'
 import Project6 from './src/Project6'
 import Project7 from './src/Project7'
+import Project8 from './src/Project8'
 
 
  class Mainclass extends Component { 
@@ -93,6 +94,15 @@ import Project7 from './src/Project7'
           Go to ImagePicker
           </Text>
         </TouchableOpacity>
+        <TouchableOpacity 
+        style={styles.Button}
+        onPress={() => this.props.navigation.navigate('Newtask')}>
+          <Text
+          style={{fontSize:30,color:'white'}}
+          >
+          Go to Newtask
+          </Text>
+        </TouchableOpacity>
         
         
       </View>
@@ -112,7 +122,8 @@ const AppNavigator = createStackNavigator({
   FlatlistData:Project4,
   DiwaliTask:Project5,
   LifeCycle:Project6,
-  ImagePicker:Project7
+  ImagePicker:Project7,
+  Newtask:Project8
   
 },
 {
@@ -127,7 +138,7 @@ const AppNavigator = createStackNavigator({
     headerRight: () => (
       <TouchableOpacity 
       style={{borderRadius:10,height:30,width:90,marginRight:10,justifyContent:'center',alignItems:'center',backgroundColor:'white'}}
-      onPress={() => alert('This is a button!')}>
+      onPress={() => alert('Hey Buddy!')}>
           <Text style={{color:'black',fontSize:20,fontWeight:'bold'}}>
             Button
           </Text>
