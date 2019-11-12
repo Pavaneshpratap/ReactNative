@@ -10,18 +10,18 @@ class FlatListItem extends Component {
     return (
       <View style={{
         flex: 1,
-        flexDirection:'row',
+        flexDirection: 'row',
 
         backgroundColor: this.props.index % 2 == 0 ? 'lightgreen' : 'pink'
       }}>
-        <View style={{flex:1,flexDirection:'column', marginTop:20}}>
+        <View style={{ flex: 1, flexDirection: 'column', marginTop: 20 }}>
 
-        <Text style={styles.textstyle}>{this.props.item.name}</Text>
-        <Text style={styles.textstyle}>{this.props.item.dept}</Text>
-        
+          <Text style={styles.textstyle}>{this.props.item.name}</Text>
+          <Text style={styles.textstyle}>{this.props.item.dept}</Text>
+
 
         </View>
-        <Image source={{ uri: this.props.item.image }} style={{height:100,width:200}} />
+        <Image source={{ uri: this.props.item.image }} style={{ height: 100, width: 200 }} />
 
       </View>
     );
@@ -37,11 +37,11 @@ const styles = StyleSheet.create({
 
 
 export default class BasicFlatList extends Component {
-    static navigationOptions = {
-        title: 'FlatListData',
-      };
-  
-    render() {
+  static navigationOptions = {
+    title: 'FlatListData',
+  };
+
+  render() {
     return (
       <View style={{ flex: 1, marginTop: 40 }}>
         <FlatList data={flatlistdata}

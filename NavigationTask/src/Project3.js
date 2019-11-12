@@ -1,20 +1,22 @@
-import React, {Component} from 'react';
-import {Text,View,FlatList,Image,TouchableOpacity} from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
 
 
 class FlatListItem extends Component {
-    
-  render (){
-    return(
+
+  render() {
+    return (
       <View>
-        <Image source={{uri:this.props.item.image}} 
-        style={{height:118,width:118,margin:10,
-          borderColor:'black',
-          borderWidth:2,
-          shadowColor: 'black',
-          shadowRadius: 10,
-          shadowOpacity: 0.5,
-          borderRadius:10}}></Image>
+        <Image source={{ uri: this.props.item.image }}
+          style={{
+            height: 118, width: 118, margin: 10,
+            borderColor: 'black',
+            borderWidth: 2,
+            shadowColor: 'black',
+            shadowRadius: 10,
+            shadowOpacity: 0.5,
+            borderRadius: 10
+          }}></Image>
 
       </View>
     );
@@ -28,54 +30,58 @@ class FlatListItem extends Component {
 
 
 export default class CollectionImages extends Component {
-    static navigationOptions = {
-        title: 'FlatListImage',
-      };
-    render(){
-    return(
-      <View style={{flex:1
+  static navigationOptions = {
+    title: 'FlatListImage',
+  };
+  render() {
+    return (
+      <View style={{
+        flex: 1
       }}>
-        
 
-        <View style={{flex:0.12,
-          backgroundColor:'black',justifyContent:'center',alignItems:'center'}}>
-          <Text style={{color:'white', fontSize:25,fontWeight:'bold',paddingTop:5}}>
+
+        <View style={{
+          flex: 0.12,
+          backgroundColor: 'black', justifyContent: 'center', alignItems: 'center'
+        }}>
+          <Text style={{ color: 'white', fontSize: 25, fontWeight: 'bold', paddingTop: 5 }}>
             Gallery
           </Text>
 
-          <View style={{backgroundColor:'white',flex:0.4,width:80,justifyContent:'center',alignItems:'center',borderRadius:10}}>
+          <View style={{ backgroundColor: 'white', flex: 0.4, width: 80, justifyContent: 'center', alignItems: 'center', borderRadius: 10 }}>
             <Text>
               7/16 Votes
             </Text>
           </View>
 
-          
+
 
         </View>
 
-        <View style={{flex:1,backgroundColor:'skyblue'}}>
+        <View style={{ flex: 1, backgroundColor: 'skyblue' }}>
 
-        <FlatList data={flatlistdata}
-        style={{
-          
-          shadowColor: 'black',
-          shadowRadius: 15,
-          shadowOpacity: 0.5}}
-        numColumns={3}
-        renderItem={({item,index})=> {
+          <FlatList data={flatlistdata}
+            style={{
 
-          return (<FlatListItem item={item} index={index}></FlatListItem>);
-        }}
-        >
-          
+              shadowColor: 'black',
+              shadowRadius: 15,
+              shadowOpacity: 0.5
+            }}
+            numColumns={3}
+            renderItem={({ item, index }) => {
 
-        </FlatList>
+              return (<FlatListItem item={item} index={index}></FlatListItem>);
+            }}
+          >
+
+
+          </FlatList>
 
         </View>
 
 
       </View>
-      
+
     );
   }
 }
