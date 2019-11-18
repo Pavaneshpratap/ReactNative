@@ -20,6 +20,11 @@ import NewDashBoard from './AsyncData/NewDashBoard'
 import GoogleSignIn1 from './GoogleSignIn/GoogleSignIn'
 // import firebase from 'firebase'
 import LogUser from './GoogleSignIn/Logged'
+import Instagram from './src/Instagram/Instagram'
+
+import Instapage from './src/Instagram/Instapage'
+import Instsplah from './src/Instagram/Instsplah'
+
 
 class Mainclass extends Component {
   static navigationOptions = {
@@ -153,6 +158,15 @@ class Mainclass extends Component {
               Go to GoogleSignIn
           </Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => this.props.navigation.navigate('Instsplah')}>
+            <Text
+              style={{ fontSize: 30, color: 'white' }}
+            >
+              Go to Instagram
+          </Text>
+          </TouchableOpacity>
 
         </ScrollView>
 
@@ -184,7 +198,10 @@ const AppNavigator = createStackNavigator({
   LogIn: LogIn,
   NewDashBoard: NewDashBoard,
   GoogleSignIn: GoogleSignIn1,
-  GLogin: LogUser
+  GLogin: LogUser,
+  Instagram:{ screen: Instagram, navigationOptions: { header: null } },
+  Instapage:{ screen: Instapage, navigationOptions: { header: null } },
+  Instsplah:{ screen: Instsplah, navigationOptions: { header: null } }
 
 },
   {
