@@ -24,6 +24,25 @@ import Instagram from './src/Instagram/Instagram'
 
 import Instapage from './src/Instagram/Instapage'
 import Instsplah from './src/Instagram/Instsplah'
+import Reduxfile from './src/Reduxx/Reduxfile'
+import Reduxtask from './src/Reduxtask/Reduxtask'
+import ReduxFlatlist from './src/ResuxFlatlist/ReduxFlatlist'
+import Reduxtodo from './src/Reduxtodo/Reduxtodo'
+import Reduxtask12 from './src/ReduxTutorial/index'
+import Gestures from './src/Gestures/Gestures'
+// import prashants from './src/prashants'
+import Try from './src/Instagram/Try'
+import Activity from './src/Instagram/Activity'
+import Msgs from './src/Instagram/Msgs'
+import Chat from './src/Instagram/Chat'
+import Editprofile from './src/Instagram/Editprofile'
+import Searchpage from './src/Instagram/Searchpage'
+import Showimage from './src/Instagram/Showimage'
+import Header from './src/Animation/Header'
+import AnimationDirectry from './src/Animation/AnimationDirectry'
+import SwipableView from './src/Animation/SwipableView'
+import Basic from './src/Animation/Basic' 
+
 
 
 class Mainclass extends Component {
@@ -168,6 +187,79 @@ class Mainclass extends Component {
           </Text>
           </TouchableOpacity>
 
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => this.props.navigation.navigate('Reduxfile')}>
+            <Text
+              style={{ fontSize: 30, color: 'white' }}
+            >
+              Go to Reduxfile
+          </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => this.props.navigation.navigate('Reduxtask')}>
+            <Text
+              style={{ fontSize: 30, color: 'white' }}
+            >
+              Go to Reduxtask
+          </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => this.props.navigation.navigate('ReduxFlatlist')}>
+            <Text
+              style={{ fontSize: 30, color: 'white' }}
+            >
+              Go to ReduxFlatlist
+          </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => this.props.navigation.navigate('Reduxtodo')}>
+            <Text
+              style={{ fontSize: 30, color: 'white' }}
+            >
+              Go to Reduxtodo
+          </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => this.props.navigation.navigate('Reduxtask12')}>
+            <Text
+              style={{ fontSize: 30, color: 'white' }}
+            >
+              Go to Reduxtask12
+          </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => this.props.navigation.navigate('Gestures')}>
+            <Text
+              style={{ fontSize: 30, color: 'white' }}
+            >
+              Go to Gestures
+          </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => this.props.navigation.navigate('AnimationDirectry')}>
+            <Text
+              style={{ fontSize: 30, color: 'white' }}
+            >
+              Go to Animation
+          </Text>
+          </TouchableOpacity>
+          {/* <TouchableOpacity
+            style={styles.Button}
+            onPress={() => this.props.navigation.navigate('prashants')}>
+            <Text
+              style={{ fontSize: 30, color: 'white' }}
+            >
+              Go to prashants
+          </Text>
+          </TouchableOpacity> */}
+
         </ScrollView>
 
 
@@ -201,7 +293,28 @@ const AppNavigator = createStackNavigator({
   GLogin: LogUser,
   Instagram:{ screen: Instagram, navigationOptions: { header: null } },
   Instapage:{ screen: Instapage, navigationOptions: { header: null } },
-  Instsplah:{ screen: Instsplah, navigationOptions: { header: null } }
+  Instsplah:{ screen: Instsplah, navigationOptions: { header: null } },
+  Reduxfile:Reduxfile,
+  Reduxtask:Reduxtask,
+  ReduxFlatlist:ReduxFlatlist,
+  Reduxtodo:Reduxtodo,
+  Reduxtask12:Reduxtask12,
+  Gestures:Gestures,
+  // prashants:prashants,
+  Try:Try,
+  Activity:Activity,
+  Msgs:{ screen: Msgs, navigationOptions: { header: null } },
+  Chat:{ screen: Chat, navigationOptions: { header: null } },
+  Editprofile:{ screen: Editprofile, navigationOptions: { header: null } },
+  Searchpage:Searchpage,
+  Showimage:{ screen: Showimage, navigationOptions: { header: null } },
+  Header:{ screen: Header, navigationOptions: { header: null } },
+  AnimationDirectry:{ screen: AnimationDirectry, navigationOptions: { header: null } },
+  SwipableView:{ screen: SwipableView, navigationOptions: { header: null } },
+  Basic:{ screen: Basic, navigationOptions: { header: null } }
+  //Popup:{ screen: Popup, navigationOptions: { header: null } }
+  // Shoppage:{screen:Shoppage,navigationOptions:{header:null}}
+  
 
 },
   {
