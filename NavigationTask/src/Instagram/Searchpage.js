@@ -1,8 +1,8 @@
 import React , {Component} from 'react'
-import {Text,View,Image,ScrollView,TextInput,StyleSheet} from 'react-native'
+import {Text,View,Image,ScrollView,TouchableOpacity,TextInput,StyleSheet} from 'react-native'
 import {vh,vw} from '../../src/Constants'
 import Searchimages from './Searchimages'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 export default class Searchpage extends Component {
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     txtinput:{
         height:vh(35),
         fontSize:vh(20),
+        paddingTop:vh(1),
         paddingLeft:vh(10),
         width:vw(290),
         marginTop:vh(33)

@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
-import {Text,View,Image,TextInput} from 'react-native'
+import {Text,View,Image,TouchableOpacity,TextInput} from 'react-native'
 import { vh, vw } from '../Constants';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class Showimage extends Component {
     render(){

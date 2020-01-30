@@ -35,6 +35,8 @@ target 'NavigationTask' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
   pod 'GoogleSignIn', '~> 5.0.0'
 
+  pod 'Firebase/Analytics'
+
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'

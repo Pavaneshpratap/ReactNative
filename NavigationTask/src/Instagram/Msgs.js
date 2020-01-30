@@ -1,6 +1,6 @@
 import React , {Component} from 'react'
-import {Text,View,Image,FlatList,ScrollView,StyleSheet,TextInput} from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {Text,View,Image,FlatList,TouchableOpacity,ScrollView,StyleSheet,TextInput} from 'react-native'
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 import { vh, vw } from '../Constants';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
 
@@ -103,9 +103,12 @@ export default class Msgs extends Component {
                     /> 
                     </View>
                     
+                   <TouchableOpacity
+                   onPress={()=>alert('hello')}>
                     <Text style={{margin:vh(20),fontSize:vh(20),marginTop:vh(25)}}>
                         Messages
                     </Text>
+                    </TouchableOpacity>
                     
                     <FlatList
           style={{height:vh(1),marginTop:vh(-10)}}
@@ -150,6 +153,7 @@ const styles = StyleSheet.create({
     txtinput:{
         height:vh(40),
         fontSize:vh(20),
+        paddingTop:vh(1),
         paddingLeft:vw(40),
         width:vw(340),
         margin:vh(15),

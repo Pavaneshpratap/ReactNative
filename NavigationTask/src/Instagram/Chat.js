@@ -85,7 +85,7 @@ export default class Chat extends Component {
 
                 </View>
                 <View style={{ flex: 0.76 }}>
-                    <Button title="Show modal" onPress={this.toggleModal} />
+                    {/* <Button title="Show modal" onPress={this.toggleModal} /> */}
                     <Modal isVisible={this.state.isModalVisible} animationInTiming={1000} 
                     // animationInTiming='300'
                     // animationOutTiming='100'

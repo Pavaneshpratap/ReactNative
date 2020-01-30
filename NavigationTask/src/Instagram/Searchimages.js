@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {Text,View,Image,FlatList,StyleSheet} from 'react-native'
+import {Text,View,Image,FlatList,TouchableOpacity,StyleSheet} from 'react-native'
 import {vh,vw} from '../Constants'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 import {withNavigation} from 'react-navigation'
 
 export class SearchImages extends Component {

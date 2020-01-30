@@ -42,6 +42,13 @@ import Header from './src/Animation/Header'
 import AnimationDirectry from './src/Animation/AnimationDirectry'
 import SwipableView from './src/Animation/SwipableView'
 import Basic from './src/Animation/Basic' 
+import Prashant from './src/Prashant'
+import Booger from './src/Booger'
+import Dropdown from './src/Dropdown' 
+import {vh,vw} from './src/Constants'
+import Modal from './src/ Modal'
+import ChatApp from './src/ChatApp/ChatApp'
+import StartChat from './src/ChatApp/StartChat'
 
 
 
@@ -54,26 +61,27 @@ class Mainclass extends Component {
   render() {
     return (
 
-      <View style={{ flex: 1, marginBottom: 10, backgroundColor: 'lightgrey', borderTopColor: 'black', borderTopWidth: 2 }}>
+      <View style={{ flex: 1, marginBottom: 10,alignItems:'center', backgroundColor: 'lightgrey', borderTopColor: 'black', borderTopWidth: 2 }}>
         <Text
-          style={{ marginLeft: 30, paddingLeft: 80, marginTop: 20, width: 350, color: 'white', backgroundColor: 'black', fontSize: 40, fontWeight: 'bold' }}
+          style={{paddingLeft: vw(80), marginTop: vh(20), width: vw(350), color: 'white', backgroundColor: 'black', fontSize: vh(40), fontWeight: 'bold' }}
         >
           Home Page
         </Text>
 
-        <ScrollView>
+        <ScrollView
+        showsVerticalScrollIndicator={false} >
           <TouchableOpacity
             style={{
               justifyContent: 'center',
-              alignItems: 'center', marginTop: 50, backgroundColor: 'black',
-              height: 50,
-              width: 300, marginLeft: 65, borderRadius: 20, shadowColor: 'black',
+              alignItems: 'center', marginTop: vh(50), backgroundColor: 'black',
+              height: vh(50),
+              width: '100%', borderRadius: 20, shadowColor: 'black',
               shadowOpacity: 0.5,
               shadowRadius: 10
             }}
             onPress={() => this.props.navigation.navigate('Details')}>
             <Text
-              style={{ color: 'white', fontSize: 30 }}
+              style={{ color: 'white', fontSize: vh(30) }}
             >
               Go to UITask
           </Text>
@@ -82,7 +90,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('Flatlistprgrm')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to Flatlistprgrm
           </Text>
@@ -91,7 +99,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('FlatListImage')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to FlatListImage
           </Text>
@@ -100,7 +108,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('FlatlistData')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to FlatlistData
           </Text>
@@ -109,7 +117,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('DiwaliTask')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to DiwaliTask
           </Text>
@@ -118,7 +126,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('LifeCycle')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to LifeCycle
           </Text>
@@ -127,7 +135,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('ImagePicker')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to ImagePicker
           </Text>
@@ -136,7 +144,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('Newtask')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to task
           </Text>
@@ -145,7 +153,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('TodayClass')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to Newtask
           </Text>
@@ -154,7 +162,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('RWS')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to RWS
           </Text>
@@ -163,7 +171,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('Splash')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to AsyncData
           </Text>
@@ -172,7 +180,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('GoogleSignIn')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to GoogleSignIn
           </Text>
@@ -181,7 +189,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('Instsplah')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to Instagram
           </Text>
@@ -191,7 +199,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('Reduxfile')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to Reduxfile
           </Text>
@@ -200,7 +208,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('Reduxtask')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to Reduxtask
           </Text>
@@ -209,7 +217,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('ReduxFlatlist')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to ReduxFlatlist
           </Text>
@@ -218,7 +226,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('Reduxtodo')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to Reduxtodo
           </Text>
@@ -227,7 +235,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('Reduxtask12')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to Reduxtask12
           </Text>
@@ -236,7 +244,7 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('Gestures')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to Gestures
           </Text>
@@ -245,20 +253,57 @@ class Mainclass extends Component {
             style={styles.Button}
             onPress={() => this.props.navigation.navigate('AnimationDirectry')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
               Go to Animation
           </Text>
           </TouchableOpacity>
-          {/* <TouchableOpacity
+          <TouchableOpacity
             style={styles.Button}
-            onPress={() => this.props.navigation.navigate('prashants')}>
+            onPress={() => this.props.navigation.navigate('Prashant')}>
             <Text
-              style={{ fontSize: 30, color: 'white' }}
+              style={{ fontSize: vh(30), color: 'white' }}
             >
-              Go to prashants
+              Go to Prashant
           </Text>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={()=>this.props.navigation.navigate('Booger')}>
+            <Text
+              style={{ fontSize: vh(30), color: 'white' }}
+            >
+              Go to Booger
+          </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => this.props.navigation.navigate('Dropdown')}>
+            <Text
+              style={{ fontSize: vh(30), color: 'white' }}
+            >
+              Go to Dropdown
+          </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => this.props.navigation.navigate('Modal')}>
+            <Text
+              style={{ fontSize: vh(30), color: 'white' }}
+            >
+              Go to Modal
+          </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => this.props.navigation.navigate('ChatApp')}>
+            <Text
+              style={{ fontSize: vh(30), color: 'white' }}
+            >
+              Go to ChatApp
+          </Text>
+          </TouchableOpacity>
+          
 
         </ScrollView>
 
@@ -311,9 +356,15 @@ const AppNavigator = createStackNavigator({
   Header:{ screen: Header, navigationOptions: { header: null } },
   AnimationDirectry:{ screen: AnimationDirectry, navigationOptions: { header: null } },
   SwipableView:{ screen: SwipableView, navigationOptions: { header: null } },
-  Basic:{ screen: Basic, navigationOptions: { header: null } }
+  Basic:{ screen: Basic, navigationOptions: { header: null } },
+  Prashant:{ screen: Prashant, navigationOptions: { header: null } },
+  Booger:{ screen: Booger, navigationOptions: { header: null } },
+  Dropdown:{ screen: Dropdown, navigationOptions: { header: null } },
   //Popup:{ screen: Popup, navigationOptions: { header: null } }
   // Shoppage:{screen:Shoppage,navigationOptions:{header:null}}
+  Modal:{ screen: Modal, navigationOptions: { header: null } },
+  ChatApp:{ screen: ChatApp, navigationOptions: { header: null } },
+  StartChat:{ screen: StartChat, navigationOptions: { header: null } },
   
 
 },
@@ -357,11 +408,11 @@ const styles = StyleSheet.create({
   Button: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: vh(20),
     backgroundColor: 'black',
-    height: 50,
-    width: 300,
-    marginLeft: 65,
+    height: vh(50),
+    width: vw(300),
+    // marginLeft: 65,
     borderRadius: 20,
     shadowColor: 'black',
     shadowOpacity: 0.5,

@@ -12,7 +12,8 @@
 #import <React/RCTRootView.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-
+@import UIKit;
+@import Firebase;
 @implementation AppDelegate
   
   
@@ -20,6 +21,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [FIRApp configure];
   
   // You can skip this line if you have the latest version of the SDK installed
   [[FBSDKApplicationDelegate sharedInstance] application:application
