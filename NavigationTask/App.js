@@ -69,6 +69,7 @@ class Mainclass extends Component {
         </Text>
 
         <ScrollView
+          style = {{flexGrow: 1, marginBottom: 40}}
         showsVerticalScrollIndicator={false} >
           <TouchableOpacity
             style={{

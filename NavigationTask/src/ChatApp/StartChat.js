@@ -71,7 +71,7 @@ export default class StartChat extends Component {
         return {
           name: this.props.navigation.getParam('Email'),
           _id: FireSDK.uid,
-          avatar: "https://images.pexels.com/photos/3596695/pexels-photo-3596695.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          // avatar: "https://images.pexels.com/photos/3596695/pexels-photo-3596695.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
         };
     }
     render() {
