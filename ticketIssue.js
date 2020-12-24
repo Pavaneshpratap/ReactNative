@@ -11,6 +11,25 @@ import {Calendar} from 'react-native-calendars'
 import moment from 'moment'
 import _isEmpty from 'lodash.isempty'
 
+//Call animation on Back the screen
+//1st screen
+// handleOnNavigateBack(commentText) {
+//         console.log("BACK", commentText);
+//        this.showVehicle()
+//     }
+
+// <TouchableOpacity 
+//                     style={{alignSelf:"flex-end",borderBottomWidth:1,borderBottomColor:color.green}}
+//                     onPress={() => this.props.navigation.navigate(Route.ADD_VEHICLE, {
+//                         onNavigateBack: this.handleOnNavigateBack.bind(this)
+//                     })}
+//                     >
+
+//2nd Screen
+// call these lines on the success of any function
+// this.props.navigation.state.params.onNavigateBack(this.state.commentText)
+//                     this.props.navigation.goBack();
+
 class TicketIssueScreen extends Component {
     constructor(props) {
         super(props);
