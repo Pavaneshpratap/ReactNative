@@ -30,6 +30,28 @@ import _isEmpty from 'lodash.isempty'
 // this.props.navigation.state.params.onNavigateBack(this.state.commentText)
 //                     this.props.navigation.goBack();
 
+//Multi Selection
+// selectFavorite=(index)=>{
+//     // console.warn(index);
+//     let helperArray = this.state.favoriteArray;
+//     let itemIndex = helperArray.indexOf(index);
+//     if(helperArray.includes(index)){
+//       helperArray.splice(itemIndex,1);
+//     }
+//     else{
+//       helperArray.push(index)
+//     }
+//     this.setState({favoriteArray:helperArray},()=>console.warn("favoriteArray",this.state.favoriteArray))
+//   }
+
+// <TouchableOpacity
+//     onPress={()=>this.selectFavorite(_id)}
+//     style={{height:vh(30),width:vh(30),justifyContent:"center",alignItems:"center"}}
+//     >
+//     <Image 
+//     source={ this.state.favoriteArray.includes(_id) ? Icons.starLight :  Icons.star} style={{height:vh(17.84),width:vh(16.95)}}/>
+// </TouchableOpacity>
+
 class TicketIssueScreen extends Component {
     constructor(props) {
         super(props);
