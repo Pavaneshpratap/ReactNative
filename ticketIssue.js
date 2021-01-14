@@ -52,6 +52,9 @@ import _isEmpty from 'lodash.isempty'
 //     source={ this.state.favoriteArray.includes(_id) ? Icons.starLight :  Icons.star} style={{height:vh(17.84),width:vh(16.95)}}/>
 // </TouchableOpacity>
 
+// If we need to compare with object of an array then
+// <Image source={this.state.favoriteDetails.some(item => item.lot_id._id === _id) ? Icons.starLight :  Icons.star } style={{height:vh(20.19),width:vh(22)}}/>
+
 class TicketIssueScreen extends Component {
     constructor(props) {
         super(props);
