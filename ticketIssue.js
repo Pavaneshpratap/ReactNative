@@ -663,3 +663,30 @@ const styles = StyleSheet.create({
     },
   });
 // const styles = StyleSheet.create({});
+
+
+
+
+
+
+
+// Multiple solutions are possible:
+
+// 1- Use array.map and check which element you want to update, when you find that element return a new object for that with updated key value otherwise just return the same object. Like this:
+
+// let newMarkers = markers.map(el => (
+//       el.name==='name'? {...el, key: value}: el
+// ))
+// this.setState({ markers });
+// 2- We can also use array.findIndex to find the index of that particular item, then update the values of that item. Like this:
+
+// let markers = [...this.state.markers];
+// let index = markers.findIndex(el => el.name === 'name');
+// markers[index] = {...markers[index], key: value};
+// this.setState({ markers });
+// Loop will be not required if we know the index of the item, directly we can write:
+
+// let markers = [ ...this.state.markers ];
+// markers[index] = {...markers[index], key: value};
+// this.setState({ markers });
+
