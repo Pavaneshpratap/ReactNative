@@ -690,3 +690,5 @@ const styles = StyleSheet.create({
 // markers[index] = {...markers[index], key: value};
 // this.setState({ markers });
 
+
+// https://codedaily.io/tutorials/22/The-Shapes-of-React-Native
