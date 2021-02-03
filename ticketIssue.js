@@ -11,6 +11,8 @@ import {Calendar} from 'react-native-calendars'
 import moment from 'moment'
 import _isEmpty from 'lodash.isempty'
 
+// let email = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 //Call animation on Back the screen
 //1st screen
 // handleOnNavigateBack(commentText) {
