@@ -699,9 +699,17 @@ const styles = StyleSheet.create({
 // onLayout = e => {
 //         const { height } = e.nativeEvent.layout;
 //         this.count = Math.floor(height / styles.text.lineHeight)
+
+//         if(this.count > 2){
+//                     this.setState({numberTrial:true})
+//                 }
+//                 else{
+
+//                 }
 //       }
 
-// <Text onLayout={this.onLayout} style={styles.text}>
+// it will be good to toggle number of line with Boolean state
+// <Text numberOfLines={this.state.numberTrial == true ? 2 : undefined  } onLayout={this.onLayout} style={styles.text}>
 //                 Random text. Random text. Random text. Random text. Random text. Random text. Random text.
 //         </Text>
 //         <Text>{`text lines count is ${this.count}`}</Text>
