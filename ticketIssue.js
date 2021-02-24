@@ -694,3 +694,22 @@ const styles = StyleSheet.create({
 
 
 // https://codedaily.io/tutorials/22/The-Shapes-of-React-Native
+
+//to get how many lines are in text **Currently works only in ios not for android
+// onLayout = e => {
+//         const { height } = e.nativeEvent.layout;
+//         this.count = Math.floor(height / styles.text.lineHeight)
+//       }
+
+// <Text onLayout={this.onLayout} style={styles.text}>
+//                 Random text. Random text. Random text. Random text. Random text. Random text. Random text.
+//         </Text>
+//         <Text>{`text lines count is ${this.count}`}</Text>
+//         <TouchableHighlight onPress={() => alert(`text lines count is ${this.count}`)}>
+//           <Text style={{ fontSize: 50 }}>tap!</Text>
+//         </TouchableHighlight>
+
+// text: {
+//     fontSize: 24,
+//     lineHeight: 30,
+//   },
