@@ -1,0 +1,52 @@
+// loading Indicator
+_start = () => {
+    Animated.loop(
+      Animated.timing(this.state.fadeAnim, {
+        toValue: 1,
+        duration: 1000,
+        Infinite: true
+      })
+    ).start();
+  };
+<Animated.View
+  style={{
+    transform: [
+      {
+        rotate: this.state.fadeAnim.interpolate({
+          inputRange: [0, 1],
+          outputRange: ["0deg", "360deg"]
+        })
+      }
+    ],
+    height: 50,
+    width: 50,
+    margin: 5,
+    borderWidth: 2,
+    borderColor: "#888",
+    borderBottomColor: "#8bffff",
+    borderRadius: 50,
+    justifyContent: "center"
+  }}
+/>
+<Animated.View />
+
+//Fade in & fade out
+
+state={fadeAnim:new Animated.Value(0)}
+
+fadeOut = () => {
+    // Will change fadeAnim value to 0 in 5 seconds
+    Animated.timing(this.state.fadeAnim, {
+      toValue: 0,
+      easing: Easing.back(),
+      duration: 2000
+    }).start();
+  };
+  
+ fadeIn = () => {
+  // Will change fadeAnim value to 1 in 5 seconds
+  Animated.timing(this.state.fadeAnim, {
+    toValue: 1,
+    duration: 5000
+  }).start();
+};
