@@ -50,3 +50,27 @@ fadeOut = () => {
     duration: 5000
   }).start();
 };
+
+// drag & release something
+//in class
+
+pan = new Animated.ValueXY();
+  panResponder = PanResponder.create({
+    onMoveShouldSetPanResponder: () => true,
+    onPanResponderMove: Animated.event([
+      null,
+      { dx: this.pan.x, dy: this.pan.y }
+    ]),
+    onPanResponderRelease: () => {
+      Animated.spring(this.pan, { toValue: { x: 0, y: 0 } }).start();
+    }
+  });
+  
+  <Animated.View
+  style={{
+    transform: [{ translateX: this.pan.x }, { translateY: this.pan.y }]
+  }}
+  {...this.panResponder.panHandlers}
+>
+  <View style={{height:100,width:100,backgroundColor:"pink"}} />
+</Animated.View>
