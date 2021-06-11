@@ -1,0 +1,138 @@
+import * as React from 'react'
+import {View,Text,ImageBackground,StyleSheet,Animated,TextInput} from 'react-native'
+import Svg, {
+    Circle,
+    Ellipse,
+    G,
+    TSpan,
+    TextPath,
+    Path,
+    Polygon,
+    Polyline,
+    Line,
+    Rect,
+    Use,
+    Symbol,
+    Defs,
+    LinearGradient,
+    RadialGradient,
+    Stop,
+    ClipPath,
+    Pattern,
+    Mask,
+  } from 'react-native-svg';
+  import {vh,vw,normalize} from '../../utils/Dimension'
+  import utils from '../../utils'
+
+  const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+  const AnimatedInput = Animated.createAnimatedComponent(TextInput);
+
+
+export default function Donut({
+    percentage = 85,
+    radius = 80,
+    strokeWidth = 12,
+    duration = 1000,
+    color = 'red',
+    delay = 0,
+    textColor,
+    max = 100,
+}) {
+    const animatedValue = React.useRef(new Animated.Value(0)).current;
+    const circleRef = React.useRef();
+    const inputRef = React.useRef();
+    const halfCircle = radius + strokeWidth;
+    const circleCircumfrance = 2 * Math.PI * radius;
+    const animation = (toValue) => {
+        return Animated.timing(animatedValue,{
+                toValue,
+                duration,
+                delay,
+                useNativeDriver:true
+        }).start(()=>{
+            // animation(toValue === 0 ? percentage : 0 );
+        });
+    }
+    
+
+    React.useEffect(()=>{
+        // console.warn("herer");
+        animation(percentage);
+        
+        animatedValue.addListener(v=>{
+            if(circleRef?.current){
+                const maxPercentage = 100 * v.value / max;
+                const strokeDashoffset = circleCircumfrance - (circleCircumfrance * maxPercentage) / 100;
+                circleRef.current.setNativeProps({
+                    strokeDashoffset,
+                });
+            }
+            if(inputRef?.current) {
+                inputRef.current.setNativeProps({
+                    text: `${Math.round(v.value)}%`
+                })
+            }
+        })
+        return () => {
+            animatedValue.removeAllListeners();
+        }
+    },[max,percentage]);
+
+
+    return(
+        <View>
+            <Svg width={radius * 2} height={radius * 2} viewBox={`0 0 ${halfCircle * 2} ${halfCircle * 2}`} >
+                <G rotation='-90' origin={`${halfCircle},${halfCircle}`}>
+                <Defs >
+                    <LinearGradient rotation='85' id="grad" x1="0" y1="0" x2="1" y2="0">
+                    {/* <Stop offset="0.6" stopColor={utils.color.enableRightIconGreen} stopOpacity="1" />
+                    <Stop offset="0.5" stopColor="#FFD080" stopOpacity="1" />
+                    <Stop offset="0.5" stopColor={utils.color.darkRed} stopOpacity="1" /> */}
+                    <Stop offset="0.6" stopColor={utils.color.enableRightIconGreen} stopOpacity="1" />
+                    <Stop offset="0.5" stopColor="#FFD080" stopOpacity="1" />
+                    <Stop offset="0.2" stopColor={utils.color.darkRed} stopOpacity="1" />
+                    {/* <Stop offset="0" stopColor="red"  />
+                    <Stop offset="1" stopColor="rgb(170,221,100)"  /> */}
+                    </LinearGradient>
+                </Defs>
+                    <Circle
+                    cx='50%'
+                    cy='50%'
+                    stroke={'transparent'}
+                    // stroke={color}
+                    strokeWidth={strokeWidth}
+                    r={radius}
+                    fill='transparent'
+                    strokeOpacity={0.2}
+                    />
+                    <AnimatedCircle
+                    ref={circleRef}
+                    cx='50%'
+                    cy='50%'
+                    stroke={"url(#grad)"}
+                    strokeWidth={strokeWidth}
+                    r={radius}
+                    fill={utils.color.textInputWhitish}
+                    strokeDasharray={circleCircumfrance}
+                    strokeDashoffset={circleCircumfrance}
+                    strokeLinecap="round"
+                    />
+                </G>
+            </Svg>
+            <AnimatedInput
+                ref={inputRef}
+                underlineColorAndroid='transparent'
+                editable={false}
+                defaultValue="0"
+                style={[
+                    StyleSheet.absoluteFillObject,
+                    {
+                        fontSize : radius / 2.5 , color : utils.color.enableRightIconGreen,
+                        fontWeight:"bold", textAlign:"center"
+                    }
+                ]}
+            />
+        </View>
+    );
+}
+
