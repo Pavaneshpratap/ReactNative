@@ -1,0 +1,30 @@
+<Animated.FlatList
+              horizontal
+              // onScroll={this._onScroll}
+              onScroll={Animated.event([{nativeEvent:{contentOffset:{x:Xscroll}}}])}
+              style={{paddingLeft:vw(25)}}
+              showsHorizontalScrollIndicator={false}
+              data={this.state.getFavoriteSports}
+              renderItem={({ item,index }) => {
+                const scale = Xscroll.interpolate({
+                  inputRange:[
+                    -1,0,
+                    sizeOfItem*index,
+                    sizeOfItem*(index+1)
+                  ],
+                  outputRange:[1,1,1,0]
+                })
+                const opacity = Xscroll.interpolate({
+                  inputRange:[
+                    -1,0,
+                    sizeOfItem*index,
+                    sizeOfItem*(index+1)
+                  ],
+                  outputRange:[1,1,1,0]
+                })
+               return (
+                 <Animated.View style={{transform:[{scale}],opacity:opacity}}>
+<Text>{Your Data}</Text>
+              </Animated.View>
+              )}}
+              />
