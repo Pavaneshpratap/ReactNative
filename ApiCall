@@ -1,0 +1,398 @@
+import Endpoint from '../utils/Endpoint'
+import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export const here = (fe) => {
+  console.warn("val", fe);
+
+}
+
+export const getAllCard = async () => {
+  console.warn("again", await AsyncStorage.getItem('TOKEN'))
+  await axios.post(Endpoint.baseUrl + Endpoint.getAllCards, {
+    "customerId": await AsyncStorage.getItem('customerId')
+  }, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer " + await AsyncStorage.getItem('TOKEN')
+    },
+  })
+    .then(async response => {
+      console.warn("all card", response)
+      return response
+      if (response.data.code == 200) {
+        //   this.self.setState({allCardsArray:response.data.cards.data},()=>console.warn("allCardsArray",this.self.state.allCardsArray))
+      }
+      else {
+        console.warn("somthing is wrong");
+      }
+    })
+    .catch(function (error) {
+      console.warn("dedede", error);
+    })
+}
+
+
+export const addBankAccount = async (accountName, accountNumber, routingNumber, checked) => {
+  console.log("country", "US",
+    "currency", "usd",
+    "account_holder_name", accountName,
+    "account_holder_type", checked == 0 ? "company" : "individual",
+    "routing_number", routingNumber,
+    "account_number", accountNumber,
+    "userId",await AsyncStorage.getItem('userId'));
+    return new Promise(async (resolve, reject) => {
+      try {
+        // -----------------REAL----------------
+        let res = await axios.post(Endpoint.baseUrl+Endpoint.addBankAccount,{
+            "country": "US",
+            "currency": "usd",
+            "account_holder_name": accountName,
+            "account_holder_type": checked == 0 ? "company" : "individual",
+            "routing_number": routingNumber,
+            "account_number": accountNumber,
+            "userId":await AsyncStorage.getItem('userId')
+        },{
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + await AsyncStorage.getItem('TOKEN')
+        },
+      })
+        .then(async response => {
+            console.warn("addBankAccount",response)
+            return response
+        })    
+        // console.log(res)
+         resolve(res.data);
+      } catch (error) {   
+        console.log({ error });   
+        reject(`${error.response.data.errors[0]}`);
+      }
+    });
+  }
+
+  export const deleteBankAccount=async(bankDetails)=>{
+    console.warn("bankDetails",bankDetails.customer,bankDetails.id,await AsyncStorage.getItem('userId'),await AsyncStorage.getItem('TOKEN'));
+    return new Promise(async (resolve, reject) => {
+      try {
+        // -----------------REAL----------------
+        let res = await axios.post(Endpoint.baseUrl + Endpoint.deleteBankAccount,{
+          "customerId":await AsyncStorage.getItem('stripeCustomerId'),
+          "userId":await AsyncStorage.getItem('userId'),
+          "bankAccountId":bankDetails.id
+        },{
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': "Bearer " + await AsyncStorage.getItem('TOKEN')
+          },
+      })
+        .then(async response => {
+            console.warn("delete bank account",response)
+            return response
+        })    
+        // console.log(res)
+         resolve(res.data);
+      } catch (error) {   
+        console.warn("error",error);
+        console.log({ error });   
+        reject(`${error.response.data.errors[0]}`);
+      }
+    });
+  }
+  
+//   export const createEvent=(eventOccurTime,eventType,selectedGame,location,eventStartDate,eventEndDate,eventDateTime,members)=>{
+//     // console.warn("dcdcdcd",accountName,accountNumber,routingNumber,checked == 0 ? "bussiness" : "individual");
+//     return new Promise(async (resolve, reject) => {
+//       try {
+
+//         // "eventOccurTime":eventOccurTime,
+//         // "eventType":eventType,
+//         // "selectedGame":selectedGame,
+//         // "location": location,
+//         // "eventStartDate": eventStartDate,
+//         // "eventEndDate": eventEndDate,
+//         // "eventDateTime":eventDateTime,
+//         // "members":members
+//         // -----------------REAL----------------
+//         let res = await axios.post(Endpoint.baseUrl+Endpoint.CREATE_EVENNT,{
+//           "eventOccurTime":eventOccurTime ,
+//           "eventType":"RECURRING",
+//           "selectedGame": selectedGame,
+//           "location": location,
+//           "eventStartDate": eventStartDate,
+//           "eventEndDate": eventStartDate,
+//           "eventDateTime":eventStartDate,
+//           "members":["6137520105af5a33728efa69"]
+//         },{
+//           headers: {
+//             'Accept': 'application/json',
+//             'Content-Type': 'application/json',
+//             'Authorization': "Bearer " + await AsyncStorage.getItem('TOKEN')
+//         },
+//         })
+//       // console.log(res)
+//       resolve(res.data);
+//     } catch (error) {
+//       console.log({ error });
+//       reject(`${error.response.data.errors[0]}`);
+//     }
+//   });
+// }
+
+export const createEvent = (eventOccurTime, eventType, selectedGame, location, eventStartDate, eventEndDate, eventDateTime, members) => {
+  // console.warn("dcdcdcd",accountName,accountNumber,routingNumber,checked == 0 ? "bussiness" : "individual");
+  return new Promise(async (resolve, reject) => {
+    try {
+      // -----------------REAL----------------
+      let res = await axios.post(Endpoint.baseUrl + Endpoint.CREATE_EVENNT, {
+        "eventOccurTime": eventOccurTime,
+        "eventType": "RECURRING",
+        "selectedGame": selectedGame,
+        "location": location,
+        "eventStartDate": eventStartDate,
+        "eventEndDate": eventStartDate,
+        "eventDateTime": eventStartDate,
+        "members": ["6137520105af5a33728efa69"]
+      }, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + await AsyncStorage.getItem('TOKEN')
+        },
+      })
+        .then(async response => {
+          console.warn("EVENT CREATED", response)
+          return response
+        })
+      // console.log(res)
+      resolve(res.data);
+    } catch (error) {
+      console.log({ error });
+      reject(`${error.response.data.errors[0]}`);
+    }
+  });
+}
+
+//get all created event
+
+export const getAllEvent = (user_id) => {
+  console.warn(user_id)
+  // console.warn("dcdcdcd",accountName,accountNumber,routingNumber,checked == 0 ? "bussiness" : "individual");
+  return new Promise(async (resolve, reject) => {
+    try {
+      // -----------------REAL----------------
+      let res = await axios.post(Endpoint.baseUrl + Endpoint.GET_ALL_EVENT, {
+        "userId":user_id
+      }, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + await AsyncStorage.getItem('TOKEN')
+        },
+      })
+        .then(async response => {
+          console.warn("EVENT CREATED", response)
+          return response
+        })
+      // console.log(res)
+      resolve(res.data);
+    } catch (error) {
+      console.log({ error });
+      reject(`${error.response.data.errors[0]}`);
+    }
+  });
+}
+
+
+
+
+
+export const pushNotificationsApi = async (notificationToggle) => {
+  console.warn("notificationToggle", notificationToggle, await AsyncStorage.getItem('userId'), await AsyncStorage.getItem('TOKEN'));
+  return new Promise(async (resolve, reject) => {
+    try {
+      // -----------------REAL----------------
+      let res = await axios.post(Endpoint.baseUrl + Endpoint.PUSHNOTIFICATION, {
+        "userId": await AsyncStorage.getItem('userId'),
+        // "notification":notificationToggle
+      }, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + await AsyncStorage.getItem('TOKEN')
+        },
+      })
+        .then(async response => {
+          console.warn("pushNotificationsApi", response)
+          return response
+        })
+      // console.log(res)
+      resolve(res.data);
+    } catch (error) {
+      console.log({ error });
+      reject(`${error.response.data.errors[0]}`);
+    }
+  });
+}
+
+export const getUserSports = async () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      // -----------------REAL----------------
+      let res = await axios.get(Endpoint.baseUrl + Endpoint.getUserSports + await AsyncStorage.getItem('userId'), {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + await AsyncStorage.getItem('TOKEN')
+        },
+      })
+        .then(async response => {
+          console.warn("pushNotificationsApi", response)
+          return response
+        })
+      resolve(res.data);
+    } catch (error) {
+      console.log({ error });
+      reject(`${error.response.data.errors[0]}`);
+    }
+  });
+}
+
+export const updateSports = async (FavoriteArray) => {
+  console.warn("sss", FavoriteArray);
+  return new Promise(async (resolve, reject) => {
+    try {
+      // -----------------REAL----------------
+      let res = await axios.post(Endpoint.baseUrl + Endpoint.UpdateSports, {
+        "userId": await AsyncStorage.getItem('userId'),
+        "sportDetails": FavoriteArray
+      }, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + await AsyncStorage.getItem('TOKEN')
+        },
+      })
+        .then(async response => {
+          console.warn("updateSports", response)
+          return response
+        })
+      resolve(res.data);
+    } catch (error) {
+      console.log({ error });
+      reject(`${error.response.data.errors[0]}`);
+    }
+  });
+}
+
+
+export const checkFleakxUser = async (number) => {
+  console.warn("sss Trial get userrrr", number);
+  return new Promise(async (resolve, reject) => {
+    try {
+      // -----------------REAL----------------
+      let res = await axios.post(Endpoint.baseUrl + Endpoint.checkFlakexUser, {
+        "phoneNumber": number
+      }, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + await AsyncStorage.getItem('TOKEN')
+        },
+      })
+        .then(async response => {
+          console.warn("checkFleakxUser", response)
+          return response
+        })
+      resolve(res.data);
+    } catch (error) {
+      console.log({ error });
+      reject(`${error.response.data.errors[0]}`);
+    }
+  });
+}
+
+//sen request function
+
+export const sendRequest = async (sx_id, rx_id) => {
+  // console.warn("sss Trial get userrrr",number);
+  return new Promise(async (resolve, reject) => {
+    try {
+      // -----------------REAL----------------
+      let res = await axios.post(Endpoint.baseUrl + Endpoint.sendRequest, {
+        "senderId": sx_id,
+        "receiverId": rx_id
+      }, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + await AsyncStorage.getItem('TOKEN')
+        },
+      })
+        .then(async response => {
+          // console.warn("checkFleakxUser", response)
+          return response
+        })
+      resolve(res.data);
+    } catch (error) {
+      console.log({ error });
+      reject(`${error.response.data.errors[0]}`);
+    }
+  });
+}
+
+
+export const getBankAccount = async () => {
+  // console.warn("sss",await AsyncStorage.getItem('TOKEN'));
+  return new Promise(async (resolve, reject) => {
+    try {
+      // -----------------REAL----------------
+      let res = await axios.get(Endpoint.baseUrl+Endpoint.getBankAcountt+await AsyncStorage.getItem('stripeCustomerId'), {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + await AsyncStorage.getItem('TOKEN')
+        },
+      })
+        .then(async response => {
+          console.warn("getBankAccount", response)
+          return response
+        })
+      resolve(res.data);
+    } catch (error) {
+      console.warn({ error });
+      reject(`${error.response.data.errors[0]}`);
+    }
+  });
+}
+
+export const postContacts = async (contacts) => {
+  // console.warn("contactsssss",contacts);
+  console.log(await AsyncStorage.getItem('TOKEN'))
+  return new Promise(async (resolve, reject) => {
+    try {
+      // -----------------REAL----------------
+      let res = await axios.post(Endpoint.baseUrl+Endpoint.postAllContacts, {
+        "numberArr": contacts
+      }, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + await AsyncStorage.getItem('TOKEN')
+        },
+      })
+        .then(async response => {
+          // console.warn("numberArr", response)
+          return response
+        })
+      resolve(res.data);
+    } catch (error) {
+      console.log({ error },'====');
+      reject(`${error.response.data.errors[0]}`);
+    }
+  });
+}
+
