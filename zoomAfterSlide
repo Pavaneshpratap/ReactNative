@@ -1,0 +1,331 @@
+import React, { Component } from 'react'
+import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native'
+import { vh, vw, normalize } from '../../utils/Dimension';
+import utils from '../../utils'
+import MapView, { PROVIDER_GOOGLE, Circle, Marker } from 'react-native-maps';
+import { CustomButton } from '../../component/button'
+import MultiSlider from '@ptomasroos/react-native-multi-slider'
+import styles from './styles'
+import RNLocation from 'react-native-location';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import Geocoder from 'react-native-geocoder';
+RNLocation.configure({
+    distanceFilter: 100, // Meters
+
+})
+
+class googleMap extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            ...props,
+            sliderOneValue: [1],
+            tracksViewChanges: true,
+            sliderOneChanging: false,
+            currentLocation: false,
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.1321,
+            longitudeDelta: 0.09321,
+            distance: 1,
+            current_latitude: 37.78825,
+            current_longitude: -122.4324,
+
+            //address
+            fullAdress: "",
+            country: "",
+            city: "",
+            state: ""
+        }
+    }
+
+    getLatestLoaction=()=>{
+        const { latitudeDelta, longitudeDelta, latitude, longitude } = this.state
+        RNLocation.requestPermission({
+            ios: "whenInUse",
+            android: {
+                detail: "coarse"
+            }
+        }).then(granted => {
+            if (granted) {
+                RNLocation.getLatestLocation({ timeout: 60000 })
+                    .then(latestLocation => {
+                        // Use the location here
+                        console.warn('current location', latestLocation)
+                        this.mapView.animateToRegion(
+                            {
+                                latitude: latestLocation.latitude,
+                                longitude: latestLocation.longitude,
+                                longitudeDelta: latitudeDelta,
+                                latitudeDelta: longitudeDelta
+                            },
+                            500
+                        );
+                        var NY = {
+                            lat: latestLocation.latitude,
+                            lng: latestLocation.longitude
+                        };
+                        Geocoder.geocodePosition(NY).then(res => {
+                            // res is an Array of geocoding object (see below)
+                            console.log(res,'location')
+                            this.setState({ fullAddress: res[0].formattedAddress, city: res[0].locality, state: res[0].adminArea, country: res[0].country })
+                        })
+                            .catch(err => console.log(err))
+                        this.setState({ latitude: latestLocation.latitude, longitude: latestLocation.longitude,current_latitude:latestLocation.latitude,current_longitude:latestLocation.longitude })
+                    })
+            }
+        })
+    }
+
+    componentDidMount() {
+       this.getLatestLoaction()
+    }
+
+    ondistanceIncrease = (val) => {
+        const { latitudeDelta, longitudeDelta, latitude, longitude } = this.state
+
+        this.mapView.animateToRegion(
+            {
+                latitude: latitude,
+                longitude: longitude,
+                longitudeDelta: latitudeDelta * val * 0.4,
+                latitudeDelta: longitudeDelta * val * 0.4
+            },
+            500
+        );
+        // })
+
+
+
+    }
+
+    stopRendering = () => {
+        this.setState({ tracksViewChanges: false });
+    }
+
+    render() {
+        const { latitude, longitude, distance, latitudeDelta, longitudeDelta,current_latitude,current_longitude } = this.state
+        return (
+            <View style={{ flex: 1, marginTop: vh(40) }}>
+                <View style={styles.headerContainer}>
+                    <TouchableOpacity
+                        onPress={this.props.onPress}
+                        style={{ padding: normalize(10) }}
+                    >
+                        <Image
+                            source={utils.Images.backLeft}
+                            style={styles.backIcon}
+                        />
+                    </TouchableOpacity>
+                    <Text style={[utils.FontsStyle.SegoeSemiBold_30, { color: utils.color.enableRightIconGreen }]}>
+                        {utils.Strings.chooseLocation}
+                    </Text>
+                    <View style={{ height: vh(16.88), width: vh(10.9) }} />
+                </View>
+                <View style={styles.mapContainer}>
+                    <MapView
+                        provider={PROVIDER_GOOGLE}
+                        style={{ height: "98%" }}
+                        ref={ref => (this.mapView = ref)}
+                        region={{
+                            latitude: latitude,
+                            longitude: longitude,
+                            latitudeDelta: latitudeDelta,
+                            longitudeDelta: longitudeDelta,
+                        }}
+
+                    >
+                        <Circle
+                            center={{ latitude: latitude, longitude: longitude }}
+                            radius={distance * 1609.34}
+                            fillColor={'rgba(157, 223, 199,.5)'}
+                            strokeColor={'transparent'}
+                            miterLimit={1000}
+                        // fillColor={'rgba(100,100,100,.5)'}
+                        >
+
+                        </Circle>
+                        <Marker
+                            shouldComponentUpdate={false}
+                            tracksViewChanges={this.state.tracksViewChanges}
+                            coordinate={{ latitude: 37.78825, longitude: -122.4324 }}
+                        // onPress={()=>this.RBSheet.open()}
+                        >
+                            <Image
+                                source={utils.Images.footballMap}
+                                onLoad={this.stopRendering}
+                                style={{ height: vh(57.61), width: vw(44.91), resizeMode: "contain" }}
+                            />
+                        </Marker>
+                        <Marker
+                            shouldComponentUpdate={false}
+                            tracksViewChanges={this.state.tracksViewChanges}
+                            coordinate={{ latitude: current_latitude, longitude: current_longitude }}
+                        // onPress={()=>this.RBSheet.open()}
+                        >
+                            <Image
+                                source={utils.Images.currentLocation}
+                                onLoad={this.stopRendering}
+                                style={{ height: vh(57.61), width: vw(44.91), resizeMode: "contain" }}
+                            />
+                        </Marker>
+                        
+                    </MapView>
+                    <View style={{width:'90%',zIndex:1,paddingTop:vh(5),position:'absolute',top:vh(30),left:vw(20),borderRadius:25,flexDirection:'row',justifyContent:'space-around',paddingHorizontal:vw(10),overflow:'hidden'}} >
+                        <View style={{width:'10%',height:vh(45),justifyContent:'center',borderTopLeftRadius:25,borderBottomLeftRadius:25,backgroundColor:'#fff',alignItems:'center'}} >
+                        {/* <Image
+                            source={utils.Images.backLeft}
+                            style={{...styles.backIcon,marginTop:vh(0),marginLeft:vw(0)}}
+                        /> */}
+                        </View>
+                        <View style={{width:'92%',zIndex:this.state.focused?1:0,height:'100%',justifyContent:'center',alignItems:'center'}} >
+                        <GooglePlacesAutocomplete
+                            placeholder='Search'
+                            onPress={(data, details = null) => {
+                                console.warn("data",data);
+                                // 'details' is provided when fetchDetails = true
+                                Geocoder.geocodeAddress(data.description).then(res => {
+                                    // res is an Array of geocoding object (see below)
+                                    this.mapView.animateToRegion(
+                                        {
+                                            latitude: res[0].position.lat,
+                                            longitude: res[0].position.lng,
+                                            longitudeDelta: latitudeDelta,
+                                            latitudeDelta: longitudeDelta
+                                        },
+                                        500
+                                    );
+                                    this.setState({ latitude: res[0].position.lat, longitude: res[0].position.lng, distance: 1, sliderOneValue: [1], },()=>console.warn("lat long",this.state.latitude,this.state.longitude))
+                                    var NY = {
+                                        lat: res[0].position.lat,
+                                        lng: res[0].position.lng
+                                    };
+                                    Geocoder.geocodePosition(NY).then(res => {
+                                        // res is an Array of geocoding object (see below)
+                                        // console.log(res)
+                                        this.setState({ fullAddress: res[0].formattedAddress, city: res[0].locality, state: res[0].adminArea, country: res[0].country })
+                                    })
+                                    // console.warn(res)
+                                })
+                                    .catch(err => console.log(err))
+                                console.log(data, details);
+                            }}
+                            query={{
+                                key: 'AIzaSyAldmFZLQ2NFbSjSZNPjdXRS0JgtlQ7q6Y',
+                                language: 'en',
+                            }}
+
+                            textInputProps={{
+                                // setAddressText:(val) => this.setState({focused:true})
+                                onFocus:(val) => this.setState({focused:true})
+                            }}
+                            
+                            styles={{
+                                listView:{
+                                    borderRadius:25,
+                                    width:'107%',
+                                    marginLeft:vw(-25)
+                                },
+                                textInput:{
+                                    // backgroundColor:'green',
+                                    borderRadius:0,
+                                    borderBottomRightRadius:25,
+                                    borderTopRightRadius:25,
+                                    height:vh(45),
+                                    
+                                },
+                               
+                                textInputContainer: {
+                                    width: '100%',
+                                    
+                                    
+                                    // marginTop:10
+                                }
+                            }}
+                        />
+                        </View>
+                        <View style={{width:'10%',height:'100%',position:'absolute',right:vw(20),justifyContent:'center',alignItems:'center',height:vh(45),top:vh(5),zIndex:0}} >
+                        <Image
+                            source={utils.Images.seachIcon}
+                            style={styles.searchIcon}
+                        /> 
+                        </View>
+                    </View>
+                    
+                    <View style={{ position: "absolute", overflow: "hidden", top: vh(130), alignItems: "center", height: vh(420), width: vw(58), borderRadius: normalize(50), backgroundColor: utils.color.white, left: vw(11),zIndex:0 }}>
+                        <View style={{ height: vh(70), justifyContent: "center", width: "100%", position: "absolute", top: 0, backgroundColor: utils.color.lightGrey }}>
+                            <Text
+                                style={[utils.FontsStyle.SegoeSemiBold_16, { textAlign: "center", color: utils.color.white, marginTop: vh(10) }]}
+                            >
+                                Flakex{'\n'}Radar
+                            </Text>
+                        </View>
+                        <Text
+                            style={[utils.FontsStyle.SegoeSemiBold_18, { color: utils.color.lightGrey, top: vh(70) }]}
+                        >30 mi</Text>
+                        <MultiSlider
+                            values={this.state.sliderOneValue}
+                            vertical={true}
+                            containerStyle={{ marginTop: vh(170) }}
+                            sliderLength={vh(200)}
+                            selectedStyle={{ backgroundColor: utils.color.enableRightIconGreen }}
+                            unselectedStyle={{ backgroundColor: utils.color.enableRightIconGreen }}
+                            trackStyle={{ height: vh(5) }}
+                            customMarker={() => (
+                                <View style={{ alignItems: "center" }}>
+                                    <View style={{ backgroundColor: utils.color.enableRightIconGreen, justifyContent: "center", alignItems: "center", height: vh(32), width: vh(32), marginTop: vh(3), borderRadius: vh(15) }}>
+                                        <Text
+                                            style={[utils.FontsStyle.SegoeSemiBold_18, { color: utils.color.white, marginLeft: vh(2.5), transform: [{ rotate: '90deg' }] }]}
+                                        >{this.state.sliderOneValue}</Text>
+                                    </View>
+                                </View>
+                            )}
+                            onValuesChangeStart={() => this.setState({ sliderOneChanging: true })}
+                            onValuesChange={(val) => this.setState({ sliderOneValue: val, sliderOneChanging: false, distance: val })}
+                            onValuesChangeFinish={(val) => this.ondistanceIncrease(val)}
+                            // onValuesChangeFinish={()=>this.setState({sliderOneChanging:false})}
+                            min={1}
+                            max={30}
+                        />
+                        <Text
+                            style={[utils.FontsStyle.SegoeSemiBold_18, { color: utils.color.lightGrey, position: "absolute", bottom: vh(65) }]}
+                        >1 mi</Text>
+                        <View style={{ height: vh(54), justifyContent: "center", alignItems: "center", width: vw(54), position: "absolute", bottom: 0, borderRadius: normalize(30), backgroundColor: utils.color.enableRightIconGreen }}>
+                            <Text
+                                style={[utils.FontsStyle.SegoeSemiBold_22, { color: utils.color.white }]}
+                            >
+                                16
+                            </Text>
+                        </View>
+                    </View>
+                    <TouchableOpacity
+                    onPress={()=>   this.getLatestLoaction()}
+                        // onPress={() => this.setState({ currentLocation: !this.state.currentLocation })}
+                        style={[styles.gpsContainer, { backgroundColor: this.state.currentLocation == false ? utils.color.white : utils.color.enableRightIconGreen }]}>
+                        <Image
+                            source={this.state.currentLocation == false ? utils.Images.gpsIcon : utils.Images.whiteLocation}
+                            style={[styles.gps, { tintColor: this.state.currentLocation == false ? utils.color.enableRightIconGreen : utils.color.white }]}
+                        />
+                    </TouchableOpacity>
+                    <CustomButton
+                        // onPress={this.props.navigateToPickFrind}
+                        onPress={() => this.props.getLocation(
+                            {
+                                location: [{
+                                    "fullAddress": this.state.fullAddress,
+                                    "country": this.state.country,
+                                    "state": this.state.state,
+                                    "city": this.state.city,
+                                    "longLat" : [this.state.longitude,this.state.latitude]
+
+                                }]
+                            })}
+                        extraStyle={styles.buttonStyle}
+                    />
+                </View>
+            </View>
+        );
+    }
+}
+
+export const GoogleMap = googleMap
