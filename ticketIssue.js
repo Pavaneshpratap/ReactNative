@@ -721,3 +721,16 @@ const styles = StyleSheet.create({
 //     fontSize: 24,
 //     lineHeight: 30,
 //   },
+
+// hit api after 1 second text change
+// onChangeText={(val)=>this.userTimeout(val)}
+//  userTimeout(val){
+//         this.setState({email:val})
+//         const { timeout } = this.state;
+//         clearTimeout(timeout);
+//         this.setState({
+//           timeout: setTimeout(() => {
+//             this.state.email!==""&&this.helper.validateEmail(this.state.email)
+//           }, 1000)
+//         })
+//       }
